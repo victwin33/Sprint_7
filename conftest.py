@@ -1,6 +1,5 @@
 import pytest
 import requests
-
 from const import Const
 from data import DataForTest
 from helpers import Helpers
@@ -16,14 +15,6 @@ def create_order():
     response_create_order = requests.post(Const.CREATE_ORDER, json=DataForTest.person_data)
     track = response_create_order.json()['track']
     return track
-
-
-@pytest.fixture(scope='function')
-def take_id_order(create_order):
-    track = create_order
-    response_get_id_order = requests.get(f'{Const.GET_ORDER_TRACK}?t={track}')
-    id_order = response_get_id_order.json()['order']['id']
-    return id_order
 
 
 @pytest.fixture(scope='function')
